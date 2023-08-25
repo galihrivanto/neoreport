@@ -1,0 +1,9 @@
+# conan files
+.cache
+CMakeUserPresets.json
+
+# build dir
+build
+
+# thirdparty
+thirdparty/ncreport
