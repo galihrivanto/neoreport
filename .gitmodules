@@ -1,4 +1,3 @@
-
 [submodule "thirdparty/ncreport"]
 	path = thirdparty/ncreport
-	url = https://github.com/wja-id/ncreport.git
+	url = git@github.com:wja-id/ncreport.git

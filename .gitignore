@@ -4,6 +4,3 @@ CMakeUserPresets.json
 
 # build dir
 build
-
-# thirdparty
-thirdparty/ncreport

@@ -5,7 +5,6 @@
 
 namespace neoreport::engine::ncreport
 {
-
     namespace core = neoreport::core;
 
     // report setting (dunno if needed)
