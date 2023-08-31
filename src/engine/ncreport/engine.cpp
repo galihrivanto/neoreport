@@ -2,11 +2,16 @@
 #include <engine/ncreport/engine.h>
 #include <core/log.h>
 #include <core/report.h>
+#include <exception>
+#include <future>
 #include <ncreport.h>
 #include <qelapsedtimer.h>
 #include <filesystem>
 #include <qvariant.h>
 #include <string>
+#include <qapplication.h>
+#include "engine.h"
+#include <QtConcurrent/qtconcurrent_global.h>
 
 namespace neoreport::engine::ncreport
 {
@@ -41,8 +46,8 @@ namespace neoreport::engine::ncreport
             rpt.addParameter(QString::fromStdString(key), QString::fromStdString(value));
         }
 
-        auto outputPath = pathJoin(this->m_output_dir, request.output_path);
-        
+        auto outputPath = pathJoin(this->m_output_dir, request.output_path);    
+
         timer.start();
         switch (request.output_format) {
             case core::OutputFormat::PDF:
@@ -73,5 +78,17 @@ namespace neoreport::engine::ncreport
     QString pathJoin(std::string p1, std::string p2)
     {
         return QString((fs::path{p1} /fs::path{p2}).c_str());
+    }
+
+    core::Report* createNCReportEngine(const ReportSetting &setting) 
+    {
+        return new engine::ncreport::NCReportEngine(setting);
+    }
+
+    std::future<core::Response> NCReportManager::enqueue(const core::Request &request)
+    {
+        // QFuture<void> future = QtConcurrent::run([=]() {
+        //     // Code in this block will run in another thread
+        // });
     }
 }

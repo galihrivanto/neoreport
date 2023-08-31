@@ -25,23 +25,7 @@ add_subdirectory(src/engine)
 
 # executable app
 add_subdirectory(cmd/app)
-
-# ncreport
-# add_subdirectory(${THIRDPARTY_DIR}/ncreport_stub)
-
-# set(SOURCES
-#     src/core/log.cpp 
-#     src/cmd/main.cpp 
-# )
-
-# include_directories(include)
-
-# message(${PROJECT_NAME})
-# add_executable(${PROJECT_NAME} ${SOURCES})
-
-# target_link_libraries(${PROJECT_NAME} PRIVATE 
-#     ${qt_LIBRARIES}
-#     ${Boost_LIBRARIES}
-# )
+add_subdirectory(cmd/gen)
+add_subdirectory(cmd/testing)
 
 # add_subdirectory(test)

@@ -2,12 +2,14 @@
 boost/1.82.0
 qt/5.15.10
 gtest/1.10.0
+fmt/10.1.1
 
 [generators]
 CMakeDeps
 CMakeToolchain
 
 [options]
+qt*:shared=True
 qt*:qtsvg=True
 qt*:qtcharts=True
 qt*:qtscript=True

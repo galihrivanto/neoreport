@@ -15,28 +15,9 @@ namespace neoreport::engine::ncreport
         std::string output_dir;
     };
 
+    class NCReportEngine;
+    core::Report* createNCReportEngine(const ReportSetting &setting);
 
-    class NCReportEngine : public core::Report
-    {
-        public:
-            NCReportEngine(const ReportSetting& setting) : 
-                m_zint_dir(setting.zint_dir), 
-                m_template_dir(setting.template_dir), 
-                m_output_dir(setting.output_dir)
-            {
-                LOG(debug) << "initiating ncreport engine";
-            }
-
-            virtual ~NCReportEngine() {
-                LOG(debug) << "destroying ncreport engine";
-            }
-    
-            virtual core::Validation validateTemplate(std::string template_path) override;
-            virtual core::Response generate(const core::Request &request) override;
-
-        private:
-            std::string m_zint_dir;
-            std::string m_template_dir;
-            std::string m_output_dir;
-    };
+    class NCReportManager;
+    core::ReportManager* createNCReportManager(const ReportSetting &setting);    
 }

@@ -22,11 +22,13 @@ int main(int argc, char **argv)
     LOG(info) << "test info";
     LOG(error) << "test error";
 
-    auto rpt = std::unique_ptr<core::Report>(new engine::ncreport::NCReportEngine(engine::ncreport::ReportSetting{
-        .zint_dir = "./zint",
-        .template_dir = "./template" ,  
-        .output_dir  = "./output"            
+   auto rpt = std::unique_ptr<core::Report>(engine::ncreport::createNCReportEngine(
+        engine::ncreport::ReportSetting{
+        .zint_dir = "",
+        .template_dir = "" ,  
+        .output_dir  = ""            
     }));
+
 
     auto result = rpt->validateTemplate("test.rpt");
     LOG(info) << "validate result" << result.valid;

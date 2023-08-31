@@ -8,6 +8,8 @@ SET(SOURCES
     engine.cpp
 )
 
+include_directories(.)
+
 add_library(NCReportEngine ${SOURCES})
 
 target_include_directories(NCReportEngine PUBLIC 

@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <future>
 
 namespace neoreport::core
 {
@@ -79,5 +80,13 @@ namespace neoreport::core
 
             virtual Validation validateTemplate(std::string template_path) = 0; 
             virtual Response generate(const Request &request) = 0;
+    };
+
+    class ReportManager
+    {
+        public:
+            virtual ~ReportManager() = default;
+
+            virtual std::future<Response> enqueue(const Request &request) = 0;
     };
 }
