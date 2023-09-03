@@ -9,6 +9,8 @@
 #include <iostream>
 #include "worker.h"
 #include <fmt/core.h>
+#include <qfuture.h>
+#include <vector>
 
 int main(int argc, char** argv)
 {
@@ -30,21 +32,26 @@ int main(int argc, char** argv)
     // std::cout << "rendering"<< std::endl;
     // rpt.runReportToPdfWriter("./output.pdf");
 
-    for (int i=1; i<=5;i++) {
-        QThread* thread = new QThread();
-        Worker* worker = new Worker(argv[1], fmt::format("output{}.pdf", i).c_str());
+    QManager manager;   
+    std::vector<QFuture<QResult>> promises; 
 
-        QObject::connect(worker, &Worker::progress, [](QString message){
-            std::cout << "Progress: " << message.toStdString() << std::endl;
-        });
+    for (int i=1; i<=5;i++) {        
+        promises.emplace_back(manager.enqueue(QRequest{
+            .templatePath = argv[1],
+            .resultPath = fmt::format("output{}.pdf", i).c_str()
+        }));
+    }
 
-        // QObject::connect(worker, &Worker::finished, &a, &QCoreApplication::quit);    
-        QObject::connect(thread, &QThread::started, worker, &Worker::run);
-
-        worker->moveToThread(thread);
-        thread->start();
+    for (auto promise: promises)
+    {
+        std::cout << "wait completed" << std::endl;
+        promise.waitForFinished();
+        std::cout << "completed" << std::endl;
+        auto result  =promise.result();
+        
+        std::cout << "result :" << (result.result == ResultType::Success ? "success" : "failed") << std::endl;
     }
     
 
-    return a.exec();
+    return EXIT_SUCCESS;
 }
