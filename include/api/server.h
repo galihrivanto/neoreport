@@ -1,4 +1,0 @@
-namespace neoreport::api 
-{
-    
-}

@@ -33,5 +33,13 @@ int main(int argc, char **argv)
     auto result = rpt->validateTemplate("test.rpt");
     LOG(info) << "validate result" << result.valid;
 
+    // return neoreport::manager(options{})
+    //     .withProtocol(
+    //         HttpServer{},
+    //         GearmanServer{}
+    //     )
+    //     .withEngine(NCReport{})
+    //     .run(); 
+
     return EXIT_SUCCESS;
 }

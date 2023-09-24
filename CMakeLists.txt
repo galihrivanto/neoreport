@@ -17,15 +17,16 @@ set(THIRDPARTY_DIR ${PROJECT_DIR}/thirdparty)
 find_package(Boost REQUIRED COMPONENTS program_options fiber log log_setup)
 include_directories(${Boost_INCLUDE_DIRS})
 
-include_directories(include)
 
 # libraries
 add_subdirectory(src/core)
-add_subdirectory(src/engine)
+add_subdirectory(src/ncreport)
+add_subdirectory(src/http)
 
 # executable app
-add_subdirectory(cmd/app)
-add_subdirectory(cmd/gen)
-add_subdirectory(cmd/testing)
+add_subdirectory(src/app)
+#add_subdirectory(cmd/neoreport)
+#add_subdirectory(cmd/gen)
+#add_subdirectory(cmd/testing)
 
 # add_subdirectory(test)
