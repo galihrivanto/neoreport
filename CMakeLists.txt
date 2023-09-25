@@ -24,9 +24,7 @@ add_subdirectory(src/ncreport)
 add_subdirectory(src/http)
 
 # executable app
-add_subdirectory(src/app)
-#add_subdirectory(cmd/neoreport)
-#add_subdirectory(cmd/gen)
-#add_subdirectory(cmd/testing)
+#add_subdirectory(src/app)
+add_subdirectory(cmd/testing)
 
 # add_subdirectory(test)

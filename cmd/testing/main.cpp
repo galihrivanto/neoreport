@@ -1,7 +1,7 @@
-#include "core/log.h"
+// main.cpp
+
 #include "ncreport.h"
 #include "ncreportsource.h"
-#include <boost/log/trivial.hpp>
 #include <cstdlib>
 #include <format>
 #include <qapplication.h>
@@ -22,20 +22,11 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
 
-    // std::cout << "testing";
-
-    // std::cout << "from thread"<< std::endl;
-    // NCReport rpt;
-    // std::cout << "argv"<< std::endl;;
-    // rpt.setReportFile("../reports/google_charts.xml");
-
-    // std::cout << "rendering"<< std::endl;
-    // rpt.runReportToPdfWriter("./output.pdf");
 
     QManager manager;   
     std::vector<QFuture<QResult>> promises; 
 
-    for (int i=1; i<=5;i++) {        
+    for (int i=1; i<=15;i++) {        
         promises.emplace_back(manager.enqueue(QRequest{
             .templatePath = argv[1],
             .resultPath = fmt::format("output{}.pdf", i).c_str()
@@ -55,3 +46,5 @@ int main(int argc, char** argv)
 
     return EXIT_SUCCESS;
 }
+
+// main.cpp

@@ -1,53 +1,12 @@
 #ifndef NCREPORT_ENGINE_H
 #define NCREPORT_ENGINE_H 
 
-#include <qobject.h>
 #include <core/report.h>
 
 namespace neoreport::engine
 {
-    class QWorker : public QObject
-    {
-        Q_OBJECT
-
-        public:
-            QWorker(
-                QString template_path,
-                QString output_path,
-                QString zint_dir,
-                core::OutputFormat output_format
-            ) : 
-            m_template_path(template_path),
-            m_output_path(output_path),
-            m_zint_dir(zint_dir),
-            m_format(output_format) {}
-
-            ~QWorker();
-
-        public slots:
-            void process();
-        
-        signals:
-            void progress(QString message);
-            void finished();
-            void error(QString err);
-
-        private:
-            QString m_template_path;
-            QString m_output_path;
-            QString m_zint_dir;
-            core::OutputFormat m_format;     
-    };
-
-    class QManager : public QObject {
-        Q_OBJECT 
-
-        public:
-            QManager() {}
-            ~QManager() {}
-
-        core::Response generate(QString zint_dir, QString template_path, QString output_path, core::OutputFormat format);            
-    };
+    class QWorker;
+    class QManager;
 
     struct NCReportEngineOptions
     {
@@ -56,15 +15,15 @@ namespace neoreport::engine
 
     class NCReportEngine {
         public:
-            NCReportEngine(const NCReportEngineOptions& options) : m_options(options)
+            NCReportEngine(const NCReportEngineOptions& options, int argc = 1) : m_options(options), m_manager(nullptr)
             {
                 LOG(debug) << "NCReportEngine()";
-                m_manager = new QManager();
+                setup();
             }
 
             ~NCReportEngine() {
                 LOG(debug) << "~NCReportEngine()";
-                delete m_manager;
+                teardown();
             }
 
             core::Validation validate(const core::Request& req);
@@ -73,6 +32,9 @@ namespace neoreport::engine
         private:
             QManager* m_manager;
             NCReportEngineOptions m_options;
+
+            void setup();
+            void teardown();
     };
 }
 

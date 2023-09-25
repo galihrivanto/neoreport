@@ -2,6 +2,7 @@
 #include <ncreport/engine.h>
 #include <ncreport.h>
 #include <qthread.h>
+#include "q_engine.h"
 
 namespace neoreport::engine
 {
@@ -66,5 +67,15 @@ namespace neoreport::engine
         );
 
         callback(std::move(resp));
+    }
+
+    void NCReportEngine::setup()
+    {
+        m_manager = new QManager();
+    }
+
+    void NCReportEngine::teardown()
+    {
+        delete m_manager;
     }
 }

@@ -15,8 +15,9 @@ find_package(Qt5 COMPONENTS Xml Gui Widgets Sql Script Core Network REQUIRED)
 include_directories(${Qt5_INCLUDE_DIRS})
 
 include_directories(include)
+include_directories(src)
 
-add_library(engine_ncreport
+add_library(engine_ncreport  
     src/engine.cpp 
 )
 

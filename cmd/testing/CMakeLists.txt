@@ -41,14 +41,6 @@ add_executable(testing worker.cpp main.cpp)
 
 target_link_libraries(testing PRIVATE
     NCReport
-    Qt5::Xml
-    Qt5::Core 
-    Qt5::Gui
-    Qt5::Widgets
-    Qt5::Script
-    Qt5::Network
-    Qt5::Svg
-    Qt5::Sql
-    Qt5::PrintSupport
+    ${Qt5_LIBRARIES}
     fmt::fmt
 )
